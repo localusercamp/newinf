@@ -6,6 +6,7 @@ from rest_framework import authentication, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+
 class AccountPayment(models.Model):
     # таблица onlinepayment_accountpayment
 
@@ -46,7 +47,9 @@ class AccountPaymentService(models.Model):
 class BonusTransaction(models.Model):
     # таблица onlinepayment_bonustransaction
     user = models.ForeignKey("bonus.User", on_delete=models.PROTECT)
-    account_payment = models.ForeignKey(AccountPayment, null=True, blank=True, on_delete=models.PROTECT)
+    account_payment = models.ForeignKey(
+        AccountPayment, null=True, blank=True, on_delete=models.PROTECT
+    )
     value = models.DecimalField(max_digits=20, decimal_places=2)
     note = models.CharField(max_length=200, null=True, blank=True)
     date_created = models.DateField(null=False, blank=False)
@@ -54,6 +57,7 @@ class BonusTransaction(models.Model):
 
     class Meta:
         db_table = "onlinepayment_bonustransaction"
+
 
 # AbstractUser - класс из django
 class User(AbstractUser):

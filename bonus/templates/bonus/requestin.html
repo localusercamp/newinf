@@ -4,19 +4,18 @@
 </head>
 
 <body>
-
-            <input type="text" name="user_id" id="user_id">
-            <button type="button" id="but"></button>
-            <button type="button" id="gt"></button>
+            <button type="button" id="gettoken">Get token</button>
+            <button type="button" id="authorize">Authorize</button>
+            <button type="button" id="ver">Verify</button>
             <button type="button" id="tst">SimpleTest</button>
         {% block content %}
             {% endblock %}
             <script>
                 var token = ""; 
-                $("#but").click(function(e) {
+                $("#gettoken").click(function(e) {
                     e.preventDefault();
                     $.when($.ajax({
-                        url: "/api-token-auth/",
+                        url: "api-token-auth/",
                         /*beforeSend: function(xhr) { 
                             xhr.setRequestHeader("Authorization", "Basic " + btoa("username:password")); 
                         },*/
@@ -24,28 +23,50 @@
                         dataType: 'json',
                         contentType: 'application/json',
                         processData: false,
-                        data: '{"username":"evgen","password":"123"}',
+                        data: '{"username":"o901mm@mail.ru","password":"password"}',
                         success: function (data) {
                             token = (JSON.stringify(data)).split("\"")[3];
                         },
                         error: function(){
-                            alert("Cannot get data");
+                            console.log("Cannot get data");
                         }
                     })).done(function(){
-                        alert(token);
+                        console.log(token);
                     });
                 });
                 
-                $("#gt").click(function(e) {
+                $("#authorize").click(function(e) {
+                    //var auth = 'Authorization: JWT ' + token;
+                    //console.log(auth);
                     e.preventDefault();
                     $.ajax({
-                        url: "GetAllTransactions/",
+                        url: "user-bonus-transactions/",
+                        //beforeSend: function (xhr) {
+                        //    xhr.setRequestHeader (auth);
+                        //},
+                        type: 'GET',
+                        //data: {
+                            
+                        //},
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function(){
+                            console.log("Cannot get data");
+                        }
+                    });
+                });
+
+                /*$("#ver").click(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "api-token-verify/",
                         beforeSend: function (xhr) {
-                            xhr.setRequestHeader ("Authorization: JWT " + token);
+                            xhr.setRequestHeader ("token : token" );
                         },
                         type: 'GET',
                         success: function (data) {
-                            alert(data);
+                            alert(data)
                         },
                         error: function(){
                             alert("Cannot get data");
@@ -56,16 +77,16 @@
                 $("#tst").click(function(e) {
                     e.preventDefault();
                     $.ajax({
-                        url: "GetT/",
+                        url: "apiview/",
                         type: 'GET',
                         success: function (data) {
-                            alert(data);
+                            
                         },
                         error: function(){
                             alert("Cannot get data");
                         }
                     });
-                });
+                });*/
 
                 /*$("#gt").click(function(e) {
                     e.preventDefault();
