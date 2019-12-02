@@ -41,12 +41,12 @@
                     e.preventDefault();
                     $.ajax({
                         url: "user-bonus-transactions/",
-                        //beforeSend: function (xhr) {
-                        //    xhr.setRequestHeader (auth);
-                        //},
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader ('Authorization','JWT '+token);
+                        },
                         type: 'GET',
                         //data: {
-                            
+                        //    'Authorization':'JWT '+token,
                         //},
                         success: function (data) {
                             console.log(data);

@@ -33,7 +33,6 @@ def GetDiagramValues(request):
     sums["total_spent"] = sums["balance"] - sums["total_earned"]
     return JsonResponse(sums, safe=False)
 
-
 class UserBonusTransactionList(ListAPIView):
     serializer_class = BonusTransactionSerializer
 

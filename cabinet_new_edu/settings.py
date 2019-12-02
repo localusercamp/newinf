@@ -26,7 +26,9 @@ SECRET_KEY = "qbioioq!54n+b!_jdkd8)drt#$#mfz^y(98$2yeg_=2^y1o9hu"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CORS_ORIGIN_ALLOW_ALL = DEBUG
+
+ALLOWED_HOSTS = ['192.168.43.237','0.0.0.0']
 
 # Application definition
 
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "bonus",
+    'corsheaders',
     "rest_framework",
 ]
 
@@ -61,6 +64,7 @@ JWT_AUTH = {
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
